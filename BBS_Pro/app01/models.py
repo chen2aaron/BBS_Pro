@@ -47,9 +47,13 @@ class BBS_user(models.Model):
     """
     user = models.OneToOneField(User)
     signature = models.CharField(
-        max_length=128, default='This gut is too lazy to leave anything here.')
+        max_length=128,
+        default='This guy is too lazy to leave anything here.')
     photo = models.ImageField(
-        upload_to="upload_imgs/", default="upload_imgs/user-1.jpg",blank=True, null=True)
+        upload_to="upload_imgs/",
+        default="upload_imgs/user-1.jpg",
+        blank=True, null=True
+    )
 
     def __unicode__(self):
         return self.user.username
