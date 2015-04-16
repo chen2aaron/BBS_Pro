@@ -11,15 +11,17 @@ class BBS(models.Model):
     """
     Description: Model Description
     帖子具体内容：题目 摘要 内容 作者 浏览量 置顶 创建时间 更新时间
+    加个板块
     """
+    category = models.ForeignKey('Category')
     title = models.CharField(max_length=64)
     summary = models.CharField(max_length=256, blank=True, null=True)
     content = models.TextField()
     author = models.ForeignKey('BBS_user')
     view_count = models.IntegerField()
     ranking = models.IntegerField()
-    creat_at = models.DateTimeField()
-    updated_at = models.DateTimeField()
+    creat_at = models.DateTimeField('创建时间', auto_now_add=True)
+    updated_at = models.DateTimeField('更新时间', auto_now_add=True)
 
     def __unicode__(self):
         return self.title
@@ -33,6 +35,9 @@ class Category(models.Model):
     """
     name = models.CharField(max_length=32, unique=True)
     administrator = models.ForeignKey('BBS_user')
+
+    def __unicode__(self):
+        return self.name
 
 
 class BBS_user(models.Model):
