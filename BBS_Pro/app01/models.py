@@ -14,12 +14,12 @@ class BBS(models.Model):
     加个板块
     """
     category = models.ForeignKey('Category')
-    title = models.CharField(max_length=64)
-    summary = models.CharField(max_length=256, blank=True, null=True)
-    content = models.TextField()
+    title = models.CharField('标题', max_length=64)
+    summary = models.CharField('概要', max_length=256, blank=True, null=True)
+    content = models.TextField('内容',)
     author = models.ForeignKey('BBS_user')
-    view_count = models.IntegerField()
-    ranking = models.IntegerField()
+    view_count = models.IntegerField('浏览量',)
+    ranking = models.IntegerField('热度',)
     creat_at = models.DateTimeField('创建时间', auto_now_add=True)
     updated_at = models.DateTimeField('更新时间', auto_now_add=True)
 

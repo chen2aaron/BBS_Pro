@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from app01.models import BBS
 from django.template.context import RequestContext
 from app01 import models
-
+from django.contrib import comments
 # Create your views here.
 
 
@@ -32,26 +32,35 @@ def category(request, cate_id):
 
 def bbs_detail(request, bbs_id):
     bbs = BBS.objects.get(id=bbs_id)
-    return render_to_response('bbs_detail.html', {'bbs_obj': bbs})
+    return render_to_response(
+        'bbs_detail.html',
+        {'bbs_obj': bbs},
+        context_instance=RequestContext(request)
+        )
 
 
 def sub_comment(request):
     print request.POST
     bbs_id = request.POST.get('bbs_id')
 
-    # comment = request.POST.get('comment_content')
-    # comment.models.Comment.objects.create(
-    #     content_type_id=7,
-    #     object_pk=bbs_id,
-    #     site_id=1,
-    #     user=request.user,
-    #     comment=comment,
-    # )
-    return HttpResponseRedirect('/detail/%s' % bbs_id)
+    comment = request.POST.get('comment_content')
+    comments.models.Comment.objects.create(
+        content_type_id=7,
+        object_pk=bbs_id,
+        site_id=1,
+        user=request.user,
+        comment=comment,
+    )
+    return HttpResponseRedirect(
+        '/detail/%s' % bbs_id,
+        )
 
 
 def bbs_pub(request):
-    return render_to_response('bbs_pub.html', context_instance=RequestContext(request))
+    return render_to_response(
+        'bbs_pub.html',
+        context_instance=RequestContext(request)
+        )
 
 
 def bbs_sub(request):

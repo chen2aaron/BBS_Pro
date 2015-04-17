@@ -21,7 +21,7 @@ class BBS_admin(admin.ModelAdmin):
         Description: Model Description
         """
         return obj.author.signature
-    signature.short_description = "签名"
+    signature.short_description = "个性签名"
 
 admin.site.register(models.BBS, BBS_admin)
 admin.site.register(models.Category)
