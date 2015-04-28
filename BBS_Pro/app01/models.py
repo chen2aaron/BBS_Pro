@@ -56,7 +56,7 @@ class BBS_user(models.Model):
         default='This guy is too lazy to leave anything here.')
     photo = models.ImageField(
         upload_to="upload_imgs/",
-        default="upload_imgs/user-1.jpg",
+        default="upload_imgs/default.jpg",
         blank=True, null=True
     )
 

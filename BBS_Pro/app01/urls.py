@@ -13,5 +13,6 @@ urlpatterns = patterns('',
     url(r'^bbs_pub/$', 'app01.views.bbs_pub'),
     url(r'^bbs_sub/$', 'app01.views.bbs_sub'),
     url(r'^category/(\d+)/$', 'app01.views.category'),
+    url(r'^testBBS/$', 'app01.views.testBBS')
     # url(r'', include(app01.urls)),
 )

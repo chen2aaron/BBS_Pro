@@ -1,4 +1,6 @@
-from django.shortcuts import render, render_to_response, RequestContext
+from django.shortcuts import render
+from django.shortcuts import render_to_response
+from django.shortcuts import RequestContext
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
 from django.template.context import RequestContext
@@ -12,10 +14,12 @@ from app01 import models
 def index(request):
     bbs_list = BBS.objects.all()
     bbs_categories = models.Category.objects.all()
+
     return render_to_response(
         'index.html', {'bbs_list': bbs_list,
                        'user': request.user,
                        'bbs_category': bbs_categories,
+                       'images':'default.jpg'
                        }
     )
 
@@ -102,6 +106,16 @@ def register(request):
                 'register.html', {'form': form},
                 context_instance=RequestContext(request)
             )
+
+
+def logout_view(request):
+    logout(request)
+    return HttpResponseRedirect('/')
+
+
+def testBBS(request):
+    return render_to_response('testBBS.html')
+
 # def Login():
 #     pass
 # def acc_login():

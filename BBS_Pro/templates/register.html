@@ -1,8 +1,16 @@
-<form method="post" action="">
-{% csrf_token %}
-<table>
-{{form.as_table}}
-</table>
-<input type="submit" value="注册" />
-<input type="hidden" name="next" value="{{ next }}" />
-</form>
+{% extends 'base-col.html' %}
+    {% block left %}
+
+        <div class="list-group-item list-topic-item" id="topic-{{bbs.id}}">
+            {% block page-content %}
+                <form method="post" action="">
+                {% csrf_token %}
+                <table>
+                {{form.as_table}}
+                </table>
+                <input type="submit" value="注册" />
+                <input type="hidden" name="next" value="{{ next }}" />
+                </form>
+            {% endblock %}
+        </div>
+{% endblock %}

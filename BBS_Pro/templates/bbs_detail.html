@@ -1,5 +1,7 @@
-{% extends 'index.html' %}
+{% extends 'base-col.html' %}
 {% load comments %}
+{% block left %}
+<div class="list-group-item list-topic-item" id="topic-{{bbs.id}}">
 {% block page-content %}
     <div class="">
         <h3> {{ bbs_obj.title }} </h3>
@@ -36,5 +38,6 @@
 
 </div>
 
-
+{% endblock %}
+</div>
 {% endblock %}
