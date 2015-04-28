@@ -25,6 +25,11 @@
       <script src="http://cdn.bootcss.com/html5shiv/3.7.2/html5shiv.min.js"></script>
       <script src="http://cdn.bootcss.com/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+     <style type="text/css">
+        body{
+            padding-top: 60px
+        }
+    </style>
   </head>
 
   <body>
@@ -39,7 +44,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/">探狗</a>
+          <a class="navbar-brand" href="/">酒醉的探狗</a>
                 </div>
         <div id="navbar" class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -55,7 +60,7 @@
 
           <ul class="nav navbar-nav navbar-right">
           <li class="">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Dropdown <span class="caret"></span></a>
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">登陆 <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
                 <li><a href="#">Action</a></li>
                 <li><a href="#">Another action</a></li>
@@ -75,7 +80,7 @@
 
 
       <!-- Main component for a primary marketing message or call to action -->
-        <div class="jumbotron">
+
         {% block page-content %}
                 {% for bbs in bbs_list %}
                     <a href="/detail/{{bbs.id}}/" >{{ bbs.title }}</a>
@@ -85,7 +90,7 @@
 
                 {% endfor%}
         {% endblock %}
-        </div>
+
 
 
 

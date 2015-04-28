@@ -1,7 +1,7 @@
-#coding:utf-8
+# coding:utf-8
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from app01 import views
+# from app01 import views
 import app01.urls
 # 注意注意注意 因为很重要所以要重复3次 要app01.urls才行
 urlpatterns = patterns('',
@@ -11,9 +11,12 @@ urlpatterns = patterns('',
 
     url(r'^admin/', include(admin.site.urls)),
     url(r'', include(app01.urls)),
-
-    # url(r'^accounts/login/$', 'django.contrib.auth.views.login',{'template_name':'login.html'}),
+    url(r'^accounts/register/$', 'app01.views.register'),
+    url(r'^accounts/login/$', 'django.contrib.auth.views.login',
+        {'template_name': 'login.html'}
+        ),
+    url(r'^accounts/logout/$', 'django.contrib.auth.views.logout'),
     # url(r'^login/$', 'views.Login'),
     # url(r'^acc_login/$', 'views.acc_login'),
     # url(r'^logout/$', 'views.logout_view'),
-)
+ )

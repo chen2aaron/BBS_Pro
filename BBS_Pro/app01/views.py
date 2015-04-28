@@ -1,10 +1,11 @@
 from django.shortcuts import render, render_to_response, RequestContext
 from django.http import HttpResponse
 from django.http import HttpResponseRedirect
-from app01.models import BBS
 from django.template.context import RequestContext
-from app01 import models
 from django.contrib import comments
+from django.contrib.auth.forms import *
+from app01.models import BBS
+from app01 import models
 # Create your views here.
 
 
@@ -36,7 +37,7 @@ def bbs_detail(request, bbs_id):
         'bbs_detail.html',
         {'bbs_obj': bbs},
         context_instance=RequestContext(request)
-        )
+    )
 
 
 def sub_comment(request):
@@ -53,14 +54,14 @@ def sub_comment(request):
     )
     return HttpResponseRedirect(
         '/detail/%s' % bbs_id,
-        )
+    )
 
 
 def bbs_pub(request):
     return render_to_response(
         'bbs_pub.html',
         context_instance=RequestContext(request)
-        )
+    )
 
 
 def bbs_sub(request):
@@ -68,7 +69,9 @@ def bbs_sub(request):
     content = request.POST.get('content')
     author = models.BBS_user.objects.get(
         user__username=request.user)
+    category = request.POST.get('category')
     models.BBS.objects.create(
+        category=category,
         title='test title',
         summary='haha',
         content=content,
@@ -78,6 +81,27 @@ def bbs_sub(request):
     )
     return HttpResponse('yes,you do it!')
 
+
+def register(request):
+    form = UserCreationForm()
+    if request.method == 'GET':
+        return render_to_response(
+            'register.html', {'form': form},
+            context_instance=RequestContext(request)
+        )
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            # auto login
+            new_user = authenticate(username=request.POST['username'],
+                                    password=request.POST['password1'])
+            login(request, new_user)
+            return redirect("/")
+            return render_to_response(
+                'register.html', {'form': form},
+                context_instance=RequestContext(request)
+            )
 # def Login():
 #     pass
 # def acc_login():
